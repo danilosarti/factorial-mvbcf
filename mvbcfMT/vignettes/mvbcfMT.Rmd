@@ -1,0 +1,92 @@
+---
+title: "Factorial multivariate Bayesian causal forests with mvbcfMT"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Factorial multivariate Bayesian causal forests with mvbcfMT}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+```
+
+## The problem
+
+Many studies expose each unit to *several* crossed binary treatments and record
+*several* correlated outcomes. Estimating one treatment's average effect on one
+outcome at a time discards two scientifically central quantities: how the
+treatments **interact**, and how the effects **vary across units**. `mvbcfMT`
+targets exactly this setting.
+
+The model decomposes the factorial response surface over the treatment lattice,
+
+$$
+Y_i = \mu(x_i) + \sum_{\varnothing \neq S} \Big(\prod_{t \in S} Z_{it}\Big)\,\tau_S(x_i) + \varepsilon_i,
+\qquad \varepsilon_i \sim N_q(0, \Sigma),
+$$
+
+into a prognostic forest $\mu$ plus one forest per main or interaction effect
+$\tau_S$, all sharing the residual covariance $\Sigma$. A single unified sampler
+draws every component.
+
+## A worked example
+
+```{r sim}
+library(mvbcfMT)
+sim <- simulate_multi(n = 300, p = 5, q = 2, Ti = 2, seed = 1)
+head(sim$data[, c(sim$responses, sim$treatments)])
+```
+
+Fitting is a single call (kept small here so the vignette builds quickly; use
+more iterations and trees in practice):
+
+```{r fit, eval = FALSE}
+fit <- fit_mvbcf_multi(
+  sim$data,
+  responses  = sim$responses,
+  treatments = sim$treatments,
+  covariates = sim$covariates,
+  n_iter = 1000, n_burn = 500
+)
+```
+
+## Estimands, honestly
+
+The population **average** effect is the calibrated primary claim; per-unit
+(CATE) surfaces are exploratory.
+
+```{r effects, eval = FALSE}
+## every main / interaction / joint effect with 95% credible intervals
+predict_effects(fit, test = FALSE)
+
+## one component's posterior effect surface
+component_effect(fit, "tau_Z1:Z2", test = FALSE)
+```
+
+Before trusting any interaction, check that its factorial cell is populated. The
+diagnostic flags thin cells as *unsupported*, not *null*:
+
+```{r overlap, eval = FALSE}
+overlap_diagnostic(fit)
+```
+
+## Debiased, doubly-robust average effects
+
+`debiased_ate()` corrects the posterior-mean regime surfaces with a cross-fitted
+augmented-IPW term over the factorial cells, giving semiparametric-efficient,
+doubly-robust average effects with efficient standard errors and Wald intervals:
+
+```{r debias, eval = FALSE}
+debiased_ate(fit)
+```
+
+## Interpretability
+
+Effects are rendered with value-suppressing uncertainty palettes, so cells with
+diffuse posteriors recede to grey and no unsupported cell is over-read:
+
+```{r vsup, eval = FALSE}
+plot_effect_forest(fit)
+plot_effect_vsup_xy(fit, "tau_Z1:Z2")
+```

@@ -1,0 +1,9 @@
+^cran-comments\.md$
+^SUBMISSION_CHECKLIST\.md$
+^\.Rproj\.user$
+^.*\.Rproj$
+^\.github$
+^doc$
+^Meta$
+^LICENSE\.md$
+^\.DS_Store$

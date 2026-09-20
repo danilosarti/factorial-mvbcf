@@ -1,0 +1,32 @@
+Package: mvbcfMT
+Type: Package
+Title: Multi-Treatment Multivariate Bayesian Causal Forests
+Version: 0.1.0
+Authors@R: person("Danilo A.", "Sarti", email = "danilo.stats@gmail.com",
+    role = c("aut", "cre", "cph"),
+    comment = c("Alternative e-mail: danilosarti@rcsi.ie"))
+Description: Estimates the joint causal effect of two or more crossed binary
+    treatments on several correlated continuous outcomes at once, extending the
+    single-treatment multivariate Bayesian causal forest to the full factorial of
+    the crossed treatments. The factorial response surface is decomposed over the
+    treatment lattice into
+    a prognostic sum-of-trees forest and one forest per main or interaction
+    effect, sharing an inverse-Wishart residual covariance across outcomes. A
+    single unified 'Rcpp' engine samples every component; the two-treatment model
+    is the order-two, two-treatment special case, and a general order-r truncation
+    handles more treatments. The package provides per-treatment propensity
+    adjustment, per-component effect and interaction estimands with credible
+    intervals, a cross-fitted debiased (one-step) average-effect estimator with
+    efficient standard errors, positivity and unmeasured-confounding diagnostics,
+    and value-suppressing uncertainty visualisations of the interaction surface.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Depends: R (>= 4.1)
+Imports: Rcpp, stats, utils, ggplot2
+LinkingTo: Rcpp, RcppArmadillo, RcppDist
+Suggests: dbarts, ranger, nnet, bartMan, vivid, patchwork,
+    testthat (>= 3.0.0), knitr, rmarkdown
+SystemRequirements: C++17
+VignetteBuilder: knitr
+RoxygenNote: 7.3.3
+Config/testthat/edition: 3

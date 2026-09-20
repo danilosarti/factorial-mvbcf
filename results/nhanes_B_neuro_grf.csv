@@ -1,0 +1,5 @@
+"app","outcome","method","ate_t1","ate_t2","ate_t12"
+"B_neuro","cerad_imm","grf-multiarm",-0.029,0.089,0.035
+"B_neuro","cerad_del","grf-multiarm",-0.052,0.077,0.065
+"B_neuro","animal","grf-multiarm",-0.106,0.21,0.016
+"B_neuro","dsst","grf-multiarm",-0.105,0.127,0.052

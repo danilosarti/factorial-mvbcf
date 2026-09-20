@@ -1,0 +1,123 @@
+NHANES application | R 4.5.2 | grf: TRUE | 2026-09-19 11:25:04 
+
+[1] pulling NHANES tables (2011-2012 _G and 2013-2014 _H) ... 
+  pulled DEMO_G: 9756 x 48 
+  pulled DEMO_H: 10175 x 47 
+  pulled BPX_G: 9338 x 27 
+  pulled BPX_H: 9813 x 23 
+  pulled GHB_G: 6549 x 2 
+  pulled GHB_H: 6979 x 2 
+  pulled TCHOL_G: 7821 x 3 
+  pulled TCHOL_H: 8291 x 3 
+  pulled BMX_G: 9338 x 26 
+  pulled BMX_H: 9813 x 26 
+  pulled BPQ_G: 6175 x 15 
+  pulled BPQ_H: 6464 x 14 
+  pulled PAQ_G: 9107 x 21 
+  pulled PAQ_H: 9484 x 96 
+  pulled DIQ_G: 9364 x 53 
+  pulled DIQ_H: 9770 x 54 
+  pulled SMQ_G: 6790 x 30 
+  pulled SMQ_H: 7168 x 32 
+  pulled RXQ_RX_G: 18704 x 7 
+  pulled RXQ_RX_H: 20194 x 13 
+  pulled CFQ_G: 1687 x 19 
+  pulled CFQ_H: 1785 x 19 
+
+[2] pooled person table: 19931 rows, 20 cols 
+
+===== APPLICATION A_cardio : statin use x physical activity ===== 
+  complete cases: 9002 
+  2x2 cell counts (rows Z1, cols Z2): 
+   
+       0    1
+  0 2169 5119
+  1  721  993
+  --- overlap diagnostic --- 
+Overlap / positivity diagnostic
+
+ Treatments:
+ treatment p_min p_max frac_near_violation n_treated
+        Z1 0.000 0.834               0.421      1714
+        Z2 0.124 0.958               0.001      6112
+
+ Interaction support (all-on cell):
+ interaction on_cell_n supported
+   tau_Z1:Z2       993      TRUE
+  --- ATE table (SD units; natural-unit column back-transformed) --- 
+      app component outcome ate_sd  lo_sd  hi_sd ate_natural excludes_zero
+ A_cardio    tau_Z1     sbp -0.080 -0.198  0.048      -1.423         FALSE
+ A_cardio    tau_Z1     dbp -0.146 -0.275 -0.022      -1.677          TRUE
+ A_cardio    tau_Z1   hba1c -0.011 -0.116  0.091      -0.012         FALSE
+ A_cardio    tau_Z1      tc -0.454 -0.578 -0.336     -18.934          TRUE
+ A_cardio    tau_Z2     sbp  0.035 -0.011  0.082       0.633         FALSE
+ A_cardio    tau_Z2     dbp  0.023 -0.031  0.072       0.266         FALSE
+ A_cardio    tau_Z2   hba1c -0.007 -0.049  0.034      -0.008         FALSE
+ A_cardio    tau_Z2      tc -0.004 -0.049  0.039      -0.170         FALSE
+ A_cardio tau_Z1:Z2     sbp -0.049 -0.177  0.063      -0.871         FALSE
+ A_cardio tau_Z1:Z2     dbp  0.056 -0.067  0.183       0.640         FALSE
+ A_cardio tau_Z1:Z2   hba1c -0.016 -0.129  0.092      -0.018         FALSE
+ A_cardio tau_Z1:Z2      tc  0.061 -0.069  0.176       2.532         FALSE
+ robustness_sd
+         0.000
+         0.022
+         0.000
+         0.336
+         0.000
+         0.000
+         0.000
+         0.000
+         0.000
+         0.000
+         0.000
+         0.000
+  saved: nhanes_A_cardio_ATE.csv / _grf.csv / _forest.pdf / _vsup_interaction.pdf / .rds 
+
+===== APPLICATION B_neuro : antihypertensive medication x physical activity ===== 
+  complete cases: 2640 
+  2x2 cell counts (rows Z1, cols Z2): 
+   
+      0   1
+  0 436 735
+  1 657 812
+  --- overlap diagnostic --- 
+Overlap / positivity diagnostic
+
+ Treatments:
+ treatment p_min p_max frac_near_violation n_treated
+        Z1 0.142 0.957                   0      1469
+        Z2 0.160 0.903                   0      1547
+
+ Interaction support (all-on cell):
+ interaction on_cell_n supported
+   tau_Z1:Z2       812      TRUE
+  --- ATE table (SD units; natural-unit column back-transformed) --- 
+     app component   outcome ate_sd  lo_sd hi_sd ate_natural excludes_zero
+ B_neuro    tau_Z1 cerad_imm -0.010 -0.104 0.086      -0.047         FALSE
+ B_neuro    tau_Z1 cerad_del -0.022 -0.119 0.072      -0.051         FALSE
+ B_neuro    tau_Z1    animal -0.086 -0.183 0.019      -0.472         FALSE
+ B_neuro    tau_Z1      dsst -0.083 -0.173 0.004      -1.422         FALSE
+ B_neuro    tau_Z2 cerad_imm  0.082 -0.031 0.181       0.381         FALSE
+ B_neuro    tau_Z2 cerad_del  0.075 -0.028 0.174       0.175         FALSE
+ B_neuro    tau_Z2    animal  0.189  0.094 0.286       1.040          TRUE
+ B_neuro    tau_Z2      dsst  0.117  0.033 0.202       2.006          TRUE
+ B_neuro tau_Z1:Z2 cerad_imm  0.029 -0.095 0.162       0.133         FALSE
+ B_neuro tau_Z1:Z2 cerad_del  0.060 -0.077 0.189       0.141         FALSE
+ B_neuro tau_Z1:Z2    animal  0.005 -0.126 0.136       0.027         FALSE
+ B_neuro tau_Z1:Z2      dsst  0.068 -0.049 0.179       1.161         FALSE
+ robustness_sd
+         0.000
+         0.000
+         0.000
+         0.000
+         0.000
+         0.000
+         0.094
+         0.033
+         0.000
+         0.000
+         0.000
+         0.000
+  saved: nhanes_B_neuro_ATE.csv / _grf.csv / _forest.pdf / _vsup_interaction.pdf / .rds 
+
+ALL DONE. See outputs/ (ATE csvs, figures, rds) and this log. 

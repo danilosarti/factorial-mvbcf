@@ -1,0 +1,13 @@
+"app","component","outcome","ate_sd","lo_sd","hi_sd","ate_natural","excludes_zero","robustness_sd"
+"B_neuro","tau_Z1","cerad_imm",-0.01,-0.104,0.086,-0.047,FALSE,0
+"B_neuro","tau_Z1","cerad_del",-0.022,-0.119,0.072,-0.051,FALSE,0
+"B_neuro","tau_Z1","animal",-0.086,-0.183,0.019,-0.472,FALSE,0
+"B_neuro","tau_Z1","dsst",-0.083,-0.173,0.004,-1.422,FALSE,0
+"B_neuro","tau_Z2","cerad_imm",0.082,-0.031,0.181,0.381,FALSE,0
+"B_neuro","tau_Z2","cerad_del",0.075,-0.028,0.174,0.175,FALSE,0
+"B_neuro","tau_Z2","animal",0.189,0.094,0.286,1.04,TRUE,0.094
+"B_neuro","tau_Z2","dsst",0.117,0.033,0.202,2.006,TRUE,0.033
+"B_neuro","tau_Z1:Z2","cerad_imm",0.029,-0.095,0.162,0.133,FALSE,0
+"B_neuro","tau_Z1:Z2","cerad_del",0.06,-0.077,0.189,0.141,FALSE,0
+"B_neuro","tau_Z1:Z2","animal",0.005,-0.126,0.136,0.027,FALSE,0
+"B_neuro","tau_Z1:Z2","dsst",0.068,-0.049,0.179,1.161,FALSE,0

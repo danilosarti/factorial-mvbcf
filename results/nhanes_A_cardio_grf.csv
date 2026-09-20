@@ -1,0 +1,5 @@
+"app","outcome","method","ate_t1","ate_t2","ate_t12"
+"A_cardio","sbp","grf-multiarm",-0.105,0.014,-0.033
+"A_cardio","dbp","grf-multiarm",-0.152,0.028,0.018
+"A_cardio","hba1c","grf-multiarm",0.015,0,0.007
+"A_cardio","tc","grf-multiarm",-0.548,0.004,0.055
