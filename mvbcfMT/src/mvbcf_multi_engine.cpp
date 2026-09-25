@@ -140,7 +140,7 @@ public:
     arma::uvec less_subset = node_vector[gi].observations && is_less;
     arma::uvec more_subset = node_vector[gi].observations && (1 - is_less);
     int sum_less = sum(less_subset), sum_more = sum(more_subset);
-    if (sum_more >= min_nodesize & sum_less >= min_nodesize) {
+    if (sum_more >= min_nodesize && sum_less >= min_nodesize) {
       if ((int)node_vector.size() < 2*gi+2+1) node_vector.resize(2*gi+2+1);
       int cl = 2*gi+1, cr = 2*gi+2;
       node_vector[cl].observations = node_vector[gi].observations && is_less;
@@ -325,7 +325,7 @@ List fast_bart_multi(arma::mat y,
   // how many posterior draws to keep
   int num_keep = 0;
   for (int i = 0; i < n_iter; i++)
-    if (i >= (n_burn-1) & (i-n_burn) % keep_every == 0) num_keep++;
+    if (i >= (n_burn-1) && (i-n_burn) % keep_every == 0) num_keep++;
 
   arma::mat sigma(q, q, arma::fill::eye);
 
@@ -397,7 +397,7 @@ List fast_bart_multi(arma::mat y,
     arma::mat total_fit(n, q, arma::fill::zeros);
     for (int k = 0; k < K; k++) total_fit += D[k] % sum_over_cube_without_slice(tp[k], -1);
 
-    bool do_keep = (iter >= (n_burn-1)) & ((iter-n_burn) % keep_every == 0);
+    bool do_keep = (iter >= (n_burn-1)) && ((iter-n_burn) % keep_every == 0);
     if (do_keep) {
       for (int k = 0; k < K; k++) {
         arma::mat fk  = sum_over_cube_without_slice(tp[k], -1);
